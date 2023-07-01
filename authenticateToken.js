@@ -14,7 +14,7 @@ const authenticateToken = (req, res, next) => {
         return res.sendStatus(403);
       }
       
-      req.userId = user.userid;
+      req.userId = user.userId;
       req.role = user.role;
       next();
     });

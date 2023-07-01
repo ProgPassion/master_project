@@ -6,6 +6,11 @@ const authenticateToken = require('./authenticateToken');
 
 const router = express.Router();
 
+const checkIfUserExists = async (username) => {
+  const user = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+  return user.rows.length > 0; 
+}
+
 // User registration
 router.post('/register', authenticateToken, async (req, res) => {
   try {
@@ -13,8 +18,15 @@ router.post('/register', authenticateToken, async (req, res) => {
 
     // Hash the password
     const userRequestRole = req.role;
-    res.json(userRequestRole);
-    return;
+
+    if(userRequestRole !== "admin") {
+      return res.status(401).json("You are unauthorized to create new users");
+    }
+
+    if(await checkIfUserExists(username)) {
+      return res.status(401).json("This user already exists in the database");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Store the user in the database
