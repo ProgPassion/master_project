@@ -28,3 +28,4 @@ After that create the users and reports TABLES by entering the following query f
 
 At the beginning is important to visit the following endpoint to create the admin user
 `http://localhost:3000/auth/create-admin`
+The default username is `admin` and default password is `test123`
