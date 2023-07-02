@@ -18,11 +18,12 @@ router.post('/reports', authenticateToken, async (req, res) => {
   
       res.json(newReport.rows[0]);
     } catch (err) {
+      console.error(err.message);
       res.status(500).send('Server Error');
     }
 });
 
-router.get('/get-all-reports', authenticateToken, async(req, res) => {
+router.get('/reports', authenticateToken, async(req, res) => {
     try {
         const userId = req.userId;
         const getAllReports = await pool.query(
