@@ -1,0 +1,27 @@
+[
+    {
+        "location": {
+            "latitude": 40.7128,
+            "longitude": -74.006
+        },
+        "type": "pothole",
+        "description": "Large pothole on Main Street near the intersection with Elm Avenue. Please proceed with caution."
+    },
+    {
+        "location": {
+            "latitude": 37.7749,
+            "longitude": -122.4194
+        },
+        "type": "road closure",
+        "description": "The main street is closed for construction between 5th Avenue and 6th Avenue. Please use an alternative route."
+    },
+    {
+        "id": 2,
+        "location": {
+            "latitude": 51.5074,
+            "longitude": -0.1278
+        },
+        "type": "obstacle",
+        "description": "There is a fallen tree."
+    }
+]
