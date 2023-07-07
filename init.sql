@@ -17,3 +17,5 @@ CREATE TABLE reports (
   status VARCHAR(255),
   user_id INT
 );
+
+

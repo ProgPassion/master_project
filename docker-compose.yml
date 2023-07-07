@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  api:
+    container_name: master-project
+    restart: unless-stopped
+    build:
+      context: ./
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: crowd_road
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db:
+    driver: local
