@@ -6,19 +6,26 @@ In postgres cli you write `\password`, it will ask you for the new password you 
 Next from postgres user shell you write this command for creating the database as specified in .env file. `createdb -h localhost crowd_road`
 It will ask you for the password you just set previously.
 In psql cli write `\c crowd_road` to enter to crowd_road database.
-After that create the users TABLE by entering the following query.
+After that create the users and reports TABLES by entering the following query from init.sql file.
 
 `CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   username VARCHAR(255),
   password VARCHAR(255),
-  role VARCHAR(255))
-`
+  role VARCHAR(255)
+  )`
 
-In this project as password hash algorithm we use bcrypt.
-The default admin password is `test123`. 
-After creating the table insert the admin credentials in users table as in below
+`CREATE TABLE reports (
+  id SERIAL PRIMARY KEY,
+  location VARCHAR(255),
+  type VARCHAR(255),
+  description VARCHAR(255),
+  submit_timestamp TIMESTAMP,
+  verdict_timestamp TIMESTAMP,
+  status VARCHAR(255),
+  user_id INT
+)`
 
-`INSERT INTO users(username, password, role) VALUES('admin', '$2b$10$5Mu4qGRC35gVcgEjAH4cMeJ7CytpKUoXxqFgUhpy0gYwl0GnsWsZS', 'admin')`
-
-The password is the encryption of phrase 'test123' using bcrypt algorithm with round 10.
+At the beginning is important to visit the following endpoint to create the admin user
+`http://localhost:3000/auth/create-admin`
+The default username is `admin` and default password is `test123`
